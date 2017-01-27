@@ -1,0 +1,58 @@
+<md-tab-group class="signup-tab-container">
+
+<md-tab>
+  <template md-tab-label>
+    All Reservations
+  </template>
+
+  <md-card class="signup-container">
+    <md-card-title> </md-card-title>
+    <md-card-content>
+      <table style="border:1px solid black;border-collapse: collapse;">
+<tr>
+  <th class="set-width">Area</th>
+  <th class="set-width">Slot ID</th>
+  <th class="set-width">Selected Time</th>
+  <th class="set-width">Selected Hours</th>
+  <th class="set-width">Booking Status</th>
+  <th class="set-width"></th>
+</tr>
+<tr *ngFor="let abc of allBookings | async">
+  <td class="set-width">{{abc.area}}</td>
+  <td class="set-width">{{abc.slotID}}</td>
+  <td class="set-width">{{abc.selectedTime}}</td>
+  <td class="set-width">{{abc.selectedHr}}</td>
+  <td class="set-width">{{abc.status}}</td>
+  <td class="set-width" *ngIf="abc.status"><button type="button" (click)="cancelThisBooking(abc.$key)" md-raised-button>Cancel Booking</button></td>
+  <td class="set-width" *ngIf="!abc.status"></td>
+</tr>
+</table>
+</md-card-content>
+</md-card>
+</md-tab>
+
+<md-tab>
+  <template md-tab-label>
+    Feedback
+  </template>
+
+  <md-card class="slot-cards">
+    <table *ngFor="let feedback of feedbackdata |  async"  style="border:1px solid black;border-collapse: collapse;">
+      <tr>
+        <td class="set-width">{{feedback.email}}</td>
+        <td class="set-width">{{feedback.userMessage}}</td>
+        <td class="set-width"><button md-raised-button (click)="deleteFeedback(feeback.$key)" type="button">Delete</button></td>
+        <td class="set-width"></td>
+      </tr>
+    </table>
+    <!--<md-card-title> Send Feedback </md-card-title>
+    <md-card-content>
+      <md-input-container class="example-full-width">
+      <textarea md-input placeholder="Address 2" name="userMessage" [(ngModel)]="feedbackdata.userMessage" id="userMessage"></textarea>
+    </md-input-container>
+    <button md-raised-button (click)="sumbitFeedback(feedbackdata)">Submit</button>
+    </md-card-content>-->
+  </md-card>
+</md-tab>
+
+</md-tab-group>

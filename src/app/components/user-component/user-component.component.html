@@ -1,0 +1,113 @@
+<md-tab-group class="signup-tab-container">
+  <md-tab>
+    <template md-tab-label>
+      Reserve Parkings Slots
+    </template>
+
+    <md-card class="slot-cards" (click)="searchSlots(1)">Saddar</md-card>
+    <md-card class="slot-cards" (click)="searchSlots(2)">Nipa</md-card>
+    <md-card class="slot-cards" (click)="searchSlots(3)">Haidari</md-card>
+    <!--<router-outlet></router-outlet>-->
+
+    <div style="clear: both"></div>
+<md-card *ngIf="searchSlotsArea==1 || searchSlotsArea==2 || searchSlotsArea==3">
+  <!--<div *ngIf="searchSlotsArea==1">
+        
+      </div>
+      <div *ngIf="searchSlotsArea==2">
+        world
+      </div>
+      <div *ngIf="searchSlotsArea==3">
+        hello2
+      </div>-->
+  <div>
+    <md-input-container>
+      <input md-input type="date" placeholder="Favorite food" value="Sushi" [(ngModel)]="userSelectedData.selectedDate" name="selectedDate">
+    </md-input-container>
+    <md-select placeholder="Start Time" [(ngModel)]="userSelectedData.selectedTime" name="selectedTime">
+      <md-option *ngFor="let food of avaialbleSlots" [value]="food.value">
+        {{food.viewValue}}
+      </md-option>
+    </md-select>
+    <md-select placeholder="Total Hours" [(ngModel)]="userSelectedData.selectedHr" name="selectedHr">
+      <md-option *ngFor="let food of availableHours" [value]="food.value">
+        {{food.viewValue}}
+      </md-option>
+    </md-select>
+
+    <button type="button" (click)="showAvailableFun()"> Search </button>
+
+    <div *ngIf="showAvailable">
+            <div *ngIf="searchSlotsArea==1" style="height: 600px;width: 600px;background-image: url('assets/3.jpg')">
+<div *ngFor="let abc of slotsForSaddar | async">
+  {{abc.slot1 + " Available"}}
+  <button (click)="addBooking(abc.$key,'Saddar')">Book Now</button>
+</div>
+</div>
+      <div *ngIf="searchSlotsArea==2">
+        <!--<div *ngIf="searchSlotsArea==1" style="height: 600px;width: 600px;background-image: url('assets/3.jpg')">-->
+        <div *ngFor="let abc of slotsForNipa | async">
+          {{abc.slot1 + " Available"}}
+          <button (click)="addBooking(abc.$key,'Nipa')">Book Now</button>
+        </div>
+      </div>
+<div *ngIf="searchSlotsArea==3" style="height: 600px;width: 600px;background-image: url('assets/3.jpg')">
+<div *ngFor="let abc of slotsForNHaidari | async">
+  {{abc.slot1 + " Available"}}<button (click)="addBooking(abc.$key,'haidari')">Book Now</button>
+</div>
+</div>
+</div>
+
+</div>
+</md-card>
+
+</md-tab>
+
+<md-tab>
+  <template md-tab-label>
+    My Reservations
+  </template>
+
+  <md-card class="signup-container">
+    <md-card-title> View Your History </md-card-title>
+    <md-card-content>
+      <table style="border:1px solid black;border-collapse: collapse;">
+<tr>
+  <th class="set-width">Area</th>
+  <th class="set-width">Slot ID</th>
+  <th class="set-width">Selected Time</th>
+  <th class="set-width">Selected Hours</th>
+  <th class="set-width">Booking Status</th>
+  <th class="set-width"></th>
+</tr>
+<tr *ngFor="let abc of getMyBookings | async">
+  <td class="set-width">{{abc.area}}</td>
+  <td class="set-width">{{abc.slotID}}</td>
+  <td class="set-width">{{abc.selectedTime}}</td>
+  <td class="set-width">{{abc.selectedHr}}</td>
+  <td class="set-width">{{abc.status}}</td>
+  <td class="set-width" *ngIf="abc.status"><button type="button" (click)="cancelThisBooking(abc.$key)" md-raised-button>Cancel Booking</button></td>
+  <td class="set-width" *ngIf="!abc.status"></td>
+</tr>
+</table>
+</md-card-content>
+</md-card>
+</md-tab>
+
+<md-tab>
+  <template md-tab-label>
+    Feedback
+  </template>
+
+  <md-card class="slot-cards">
+    <md-card-title> Send Feedback </md-card-title>
+    <md-card-content>
+      <md-input-container class="example-full-width">
+      <textarea md-input placeholder="Address 2" name="userMessage" [(ngModel)]="feedbackdata.userMessage" id="userMessage"></textarea>
+    </md-input-container>
+    <button md-raised-button (click)="sumbitFeedback(feedbackdata)">Submit</button>
+    </md-card-content>
+  </md-card>
+</md-tab>
+
+</md-tab-group>

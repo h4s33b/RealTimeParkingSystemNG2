@@ -1,0 +1,22 @@
+.signup-tab-container{
+  max-width: 600px !important;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.signup-container{
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 20px;
+  /*height: 400px;*/
+}
+.signup-container md-input-container{
+  width: 100% !important;
+}
+
+.login-card{
+    width: 50%;
+    margin: 20px auto;
+}
+.example-full-width {
+  width: 100%;
+}

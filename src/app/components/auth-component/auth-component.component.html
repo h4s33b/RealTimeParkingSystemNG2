@@ -1,0 +1,39 @@
+<md-card class="login-card">
+  <h1>User Login / Signup</h1>
+  <md-tab-group>
+    <md-tab>
+      <template md-tab-label>
+        Login
+      </template>
+      <form #loginForm="ngForm" novalidate style="margin-top: 20px">
+        <md-input-container class="example-full-width">
+          <input md-input placeholder="Email" type="email" value="" name="email" [(ngModel)]="userLoginData.email">
+        </md-input-container>
+        <md-input-container class="example-full-width">
+          <input md-input placeholder="Password" value="" type="password" name="password" [(ngModel)]="userLoginData.password">
+        </md-input-container>
+        <button md-raised-button type="button" (click)="userLogin(loginForm.valid, loginForm.value)">Login</button>
+      </form>
+    </md-tab>
+    <md-tab>
+      <template md-tab-label>
+        SignUp
+      </template>
+        <form #signUpForm="ngForm" novalidate style="margin-top: 20px">
+          <md-input-container class="example-full-width">
+            <input md-input placeholder="Name" value="" type="text" name="name" [(ngModel)]="userSignUpData.name">
+          </md-input-container>
+          <md-input-container class="example-full-width">
+            <input md-input placeholder="Email" type="email" value="" name="email" [(ngModel)]="userSignUpData.email">
+          </md-input-container>
+          <md-input-container class="example-full-width">
+            <input md-input placeholder="Password" value="" type="password" name="password" [(ngModel)]="userSignUpData.password">
+          </md-input-container>
+          <md-input-container class="example-full-width">
+            <input md-input placeholder="Cell Number" value="" type="text" name="cellNumber" [(ngModel)]="userSignUpData.cellNumber">
+          </md-input-container>
+          <button md-raised-button type="button" (click)="signUpUser(signUpForm.valid, signUpForm.value)">Signup</button>
+        </form>
+    </md-tab>
+  </md-tab-group>
+</md-card>

@@ -1,0 +1,9 @@
+.signup-parking-container{
+    min-height: 400px;
+}
+
+.slot-cards{
+    width: 300px;
+    margin: 20px;
+    float : left;
+}

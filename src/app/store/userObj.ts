@@ -1,0 +1,1 @@
+export interface IUserData { "email": string,  "name": string, "cellNumber": string, "isAdmin"?:boolean };

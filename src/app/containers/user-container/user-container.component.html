@@ -1,0 +1,24 @@
+<md-toolbar color="primary">
+  <h3>Real-time Parking Booking System</h3>
+  <span flex></span>
+  <div>
+    <button md-icon-button [mdMenuTriggerFor]="menu" style="position: absolute;top: 20px;right: 40px;color:white;font-weight: bold;"> <b>Menu</b>
+</button>
+</div>
+
+<md-menu #menu="mdMenu">
+  <!--<button md-menu-item>
+    <md-icon>dialpad</md-icon>
+    <span>Redial</span>
+  </button>
+  <button md-menu-item disabled>
+    <md-icon>voicemail</md-icon>
+    <span>Check voicemail</span>
+  </button>-->
+  <button md-menu-item (click)="logoutUser()">
+    <md-icon>logout</md-icon>
+    <span>Logout</span>
+  </button>
+</md-menu>
+</md-toolbar>
+<app-user-component></app-user-component>
