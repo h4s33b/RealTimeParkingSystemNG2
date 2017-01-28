@@ -27,7 +27,7 @@ export class UserComponentComponent implements OnInit {
   showBookingsData: any;
   searchBookings: any;
   feedbackdata: any;
-  isLoggedIn : any;
+  isLoggedIn: any;
   constructor(private af: AngularFire, public router: Router) {
     this.userData$.subscribe(val => {
       console.log("val", val);
@@ -126,10 +126,43 @@ export class UserComponentComponent implements OnInit {
   }
 
   showAvailableFun() {
+    var splitBookingTime: any;
+    var splitBookingTimeTime;
+    var userSelectedTimeTime;
+    var userSelectedHours;
     if (!this.userSelectedData.selectedTime || !this.userSelectedData.selectedHr || !this.userSelectedData.selectedDate) {
       alert("Please Select Start Time and Hours.");
     } else {
       this.showAvailable = true;
+      var thisSlot = this.searchSlotsArea == 1 ? 'Saddar' : this.searchSlotsArea == 2 ? 'Nipa' : "haidari";
+      this.mainRef.list('parkingSlots/' + thisSlot).subscribe(val => {
+        val.forEach(element => {
+          if (element.bookings) {
+            var objectKeys = Object.keys(element.bookings);
+            if (objectKeys.length) {
+              for (var k = 0; k < objectKeys.length; k++) {
+                splitBookingTime = element.bookings[objectKeys[k]].bookingSlot.split("_");
+                splitBookingTimeTime = Number(splitBookingTime[2].split(":")[0] + splitBookingTime[2].split(":")[1]);
+                userSelectedTimeTime = this.avaialbleSlots[this.userSelectedData.selectedTime.split("k")[1]].viewValue;
+                userSelectedTimeTime = Number(userSelectedTimeTime.split(":")[0] + userSelectedTimeTime.split(":")[1]);
+                userSelectedHours = Number(this.availableHours[this.userSelectedData.selectedHr.split("k")[1]].viewValue.split(" ")[0]) * 100;
+                if (splitBookingTime[4] == this.userSelectedData.selectedDate && splitBookingTimeTime >= userSelectedTimeTime && splitBookingTimeTime + splitBookingTime[3] * 100 >= userSelectedTimeTime + userSelectedHours) {
+                  console.log("Not Available 1", element.bookings[objectKeys[k]].bookingSlot);
+                } else if (splitBookingTime[4] == this.userSelectedData.selectedDate && splitBookingTimeTime < userSelectedTimeTime && splitBookingTimeTime + splitBookingTime[3] * 100 <= userSelectedTimeTime + userSelectedHours) {
+                  console.log("Not Available 2", element.bookings[objectKeys[k]].bookingSlot);
+                } else {
+                  console.log("Available");
+                }
+              }
+            }
+            // element.bookings.forEach(val2=>{
+            //   console.log(element.bookings.val2);
+            // })
+
+          }
+        });
+      })
+      //
     }
   }
 
